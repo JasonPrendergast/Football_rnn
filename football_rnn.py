@@ -32,9 +32,10 @@ def recurrent_neural_network(x):
 
 
 saver = tf.train.Saver()
-#saver = tf.train.import_meta_graph('./model.ckpt.meta')
 tf_log = 'tf.log'
-
+###########################################################################################
+#                                   Training the network                                  #
+###########################################################################################
 def train_neural_network(x):
     prediction = recurrent_neural_network(x)
     #cost = tf.reduce_mean( tf.nn.softmax_cross_entropy_with_logits(prediction,y) )
