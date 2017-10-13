@@ -9,7 +9,7 @@ lemmatizer = WordNetLemmatizer()
 train_x,train_y,test_x,test_y = pickle.load(open("football_set.pickle","rb"))
 
 ############################################################################
-#                                 Create Globals                           #
+#                            Create Globals                                #
 ############################################################################
 
 hm_epochs =100
@@ -26,7 +26,7 @@ y = tf.placeholder('float')
 layer = {'weights':tf.Variable(tf.random_normal([rnn_size,n_classes])),'biases':tf.Variable(tf.random_normal([n_classes]))}
 
 #############################################################################
-#                               Define Network Shape                        #
+#                            Define Network Shape                           #
 #############################################################################
 
 def recurrent_neural_network(x):
@@ -64,6 +64,9 @@ def train_neural_network(x):
             epoch_loss = 1
             i=0
             batches_run = 0
+#############################################################################
+#                          Prep data for training                           #
+#############################################################################
             while i < int(total_batches*batch_size):
                 batch_x = []
                 batch_y = []
@@ -73,6 +76,9 @@ def train_neural_network(x):
                 batch_x = np.array(train_x[start:end])
                 batch_y = np.array(train_y[start:end])
                 if len(batch_x) >= batch_size:
+#############################################################################
+#                          Push the batches into the network                #
+#############################################################################
                     
                         batch_x=np.array(batch_x)
                         batch_x = batch_x.reshape((batch_size,n_chunks,chunk_size))
@@ -85,7 +91,9 @@ def train_neural_network(x):
                         batches_run +=1
                         i+=batch_size
                         #print('Batch run:',batches_run,'/',total_batches,'| Epoch:',epoch,'| Batch Loss:',c,)
-
+#############################################################################
+#                                END EPOCH                                  #
+#############################################################################
             i=0
             #print(len(train_x))
             correct = tf.equal(tf.argmax(prediction, 1), tf.argmax(y, 1))
@@ -98,13 +106,13 @@ def train_neural_network(x):
             #test_x=test_x.reshape((batch_size,n_chunks,chunk_size))
             totaltestbatch = int(len(test_x)/batch_size)
             #print(totaltestbatch)
+#############################################################################
+#                          Crreating testing batches                        #
+#############################################################################
             
             while i < int(totaltestbatch*batch_size):
                 testbatch_x = []
                 testbatch_y = []
-                #print('inthis')
-               
-                #batches_run = 0
                 start = i
                 end = i+batch_size
                 testbatch_x = np.array(test_x[start:end])
