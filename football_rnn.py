@@ -8,6 +8,10 @@ from tensorflow.contrib import rnn
 lemmatizer = WordNetLemmatizer()
 train_x,train_y,test_x,test_y = pickle.load(open("football_set.pickle","rb"))
 
+#######################################################################################
+#                                 Create Globals                                      #
+#######################################################################################
+
 hm_epochs =100
 n_classes = 2
 batch_size = 1
@@ -20,6 +24,7 @@ x = tf.placeholder('float', [None, n_chunks,chunk_size])
 y = tf.placeholder('float')
 
 layer = {'weights':tf.Variable(tf.random_normal([rnn_size,n_classes])),'biases':tf.Variable(tf.random_normal([n_classes]))}
+
 
 def recurrent_neural_network(x):
     x = tf.transpose(x, [1,0,2])
