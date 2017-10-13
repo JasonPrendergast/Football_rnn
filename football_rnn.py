@@ -25,6 +25,9 @@ y = tf.placeholder('float')
 
 layer = {'weights':tf.Variable(tf.random_normal([rnn_size,n_classes])),'biases':tf.Variable(tf.random_normal([n_classes]))}
 
+#############################################################################
+#                               Define Network Shape                        #
+#############################################################################
 
 def recurrent_neural_network(x):
     x = tf.transpose(x, [1,0,2])
