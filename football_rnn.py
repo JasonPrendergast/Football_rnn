@@ -8,9 +8,9 @@ from tensorflow.contrib import rnn
 lemmatizer = WordNetLemmatizer()
 train_x,train_y,test_x,test_y = pickle.load(open("football_set.pickle","rb"))
 
-#######################################################################################
-#                                 Create Globals                                      #
-#######################################################################################
+############################################################################
+#                                 Create Globals                           #
+############################################################################
 
 hm_epochs =100
 n_classes = 2
@@ -41,9 +41,9 @@ def recurrent_neural_network(x):
 
 saver = tf.train.Saver()
 tf_log = 'tf.log'
-###########################################################################################
-#                                   Training the network                                  #
-###########################################################################################
+#############################################################################
+#                          Training the network                             #
+#############################################################################
 def train_neural_network(x):
     prediction = recurrent_neural_network(x)
     #cost = tf.reduce_mean( tf.nn.softmax_cross_entropy_with_logits(prediction,y) )
